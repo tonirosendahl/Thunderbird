@@ -1,0 +1,11 @@
+#!/bin/sh
+#
+# Typhoon H specific board sensors init
+#------------------------------------------------------------------------------
+
+mpu6000 -I start
+hmc5883 start
+ms5611 -I start
+adc start
+usleep 300000
+battery_status start

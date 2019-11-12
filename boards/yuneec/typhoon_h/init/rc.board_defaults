@@ -1,0 +1,31 @@
+#!/bin/sh
+#
+# Typhoon H specific board defaults
+#------------------------------------------------------------------------------
+if param compare SYS_AUTOSTART 0
+then
+	set AUTOCNF yes
+fi
+
+# Hexacopter X
+param set SYS_AUTOSTART 6001
+
+set RC_INPUT_ARGS "-d /dev/ttyS3"
+set DATAMAN_OPT -i
+set LOGGER_ARGS "-m mavlink"
+
+gps start -d /dev/ttyS0
+tap_esc start -d /dev/ttyS2 -n 6
+usleep 300000
+set OUTPUT_MODE tap_esc
+
+# Disable safety switch
+param set CBRK_IO_SAFETY 22027
+
+# Set MIXER_AUX to enable PWM output to landing gear.
+set MIXER_AUX hexa_x
+set PWM_OUT 12345678
+
+fmu mode_pwm
+mixer load /dev/px4fmu /etc/mixers/th_gear.main.mix
+pwm arm
