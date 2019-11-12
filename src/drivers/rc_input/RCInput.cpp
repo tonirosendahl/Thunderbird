@@ -522,6 +522,8 @@ RCInput::cycle()
 				}
 
 			} else {
+
+				st24_reset();
 				// Scan the next protocol
 				set_rc_scan_state(RC_SCAN_SUMD);
 			}
