@@ -16,6 +16,7 @@ px4_add_board(
 		gps
 		imu/mpu6000
 		magnetometer/hmc5883
+		magnetometer/ist8310
 		px4fmu
 		rc_input
 		tap_esc

@@ -4,7 +4,11 @@
 #------------------------------------------------------------------------------
 
 mpu6000 -I start
+
+#The magnetometer may be either one of these.
 hmc5883 start
+ist8310 -C -b 1 -R 4 start
+
 ms5611 -I start
 adc start
 usleep 300000
