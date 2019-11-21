@@ -3,3 +3,4 @@
 # Typhoon H specific board extras init
 #------------------------------------------------------------------------------
 
+st16_telemetry start
