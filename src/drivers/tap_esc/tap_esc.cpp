@@ -383,7 +383,7 @@ void TAP_ESC::send_esc_outputs(const uint16_t *pwm, const uint8_t motor_cnt)
 		}
 	}
 
-	rpm[_responding_esc] |= (RUN_FEEDBACK_ENABLE_MASK | RUN_BLUE_LED_ON_MASK);
+	rpm[_responding_esc] |= (RUN_FEEDBACK_ENABLE_MASK | RUN_LED_ON_MASK);
 
 	EscPacket packet = {PACKET_HEAD, _channels_count, ESCBUS_MSG_ID_RUN};
 	packet.len *= sizeof(packet.d.reqRun.rpm_flags[0]);
