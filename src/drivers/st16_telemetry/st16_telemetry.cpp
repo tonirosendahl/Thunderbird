@@ -179,7 +179,7 @@ int send_packet(int uart_fd)
 		const battery_status_s &bat = subscription_data->battery_status_sub.get();
 		const vehicle_gps_position_s &gps = subscription_data->vehicle_gps_position_sub.get();
 		const vehicle_global_position_s &gpos = subscription_data->vehicle_global_position_sub.get();
-		const vehicle_air_data_s &air_data = subscription_data->vehicle_air_data_sub.get();
+		//const vehicle_air_data_s &air_data = subscription_data->vehicle_air_data_sub.get();
 
 		if (gps.fix_type > 1)
 		{
@@ -196,7 +196,8 @@ int send_packet(int uart_fd)
 
 		telemetryPayload.lat = gps.lat;
 		telemetryPayload.lon = gps.lon;
-		telemetryPayload.alt = roundf(frac(air_data.baro_alt_meter) * 100.0f);
+		//telemetryPayload.alt = roundf(frac(air_data.baro_alt_meter) * 100.0f);
+		telemetryPayload.alt = roundf(frac(gpos.alt) * 100.0f);
 		telemetryPayload.vx = (int16_t)gpos.vel_n;
 		telemetryPayload.vy = (int16_t)gpos.vel_e;
 		telemetryPayload.vz = (int16_t)gpos.vel_d;
