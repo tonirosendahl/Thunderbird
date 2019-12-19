@@ -197,10 +197,10 @@ int send_packet(int uart_fd)
 		telemetryPayload.lat = gps.lat;
 		telemetryPayload.lon = gps.lon;
 		//telemetryPayload.alt = roundf(frac(air_data.baro_alt_meter) * 100.0f);
-		telemetryPayload.alt = roundf(frac(gpos.alt) * 100.0f);
-		telemetryPayload.vx = (int16_t)gpos.vel_n;
-		telemetryPayload.vy = (int16_t)gpos.vel_e;
-		telemetryPayload.vz = (int16_t)gpos.vel_d;
+		telemetryPayload.alt = gps.alt * 0.1f;
+		telemetryPayload.vx = (int16_t)gpos.vel_n * 100.0f;
+		telemetryPayload.vy = (int16_t)gpos.vel_e * 100.0f;
+		telemetryPayload.vz = (int16_t)gpos.vel_d * 100.0f;
 		telemetryPayload.nsat = gps_status + (uint8_t)(gps.satellites_used);
 		telemetryPayload.voltage = (uint8_t)roundf((bat.voltage_v-5) * 10.0f);//    0x63; //hex
 		telemetryPayload.current = 0;
