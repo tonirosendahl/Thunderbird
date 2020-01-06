@@ -46,7 +46,7 @@
 extern "C" __EXPORT int typhoon_bind_main(int argc, char *argv[]);
 
 
-int port_number;
+int bind_port_number;
 
 /**
  *  Opens a device for use as UART.
@@ -54,20 +54,20 @@ int port_number;
  *  @param uart_fd file-descriptor of UART device
  *  @return 0 on success, -1 on error
  */
-int initialise_uart(const char *const device, int &uart_fd);
+int bind_initialise_uart(const char *const device, int &uart_fd);
 
 /**
  *  Closes a device previously opened with initialise_uart().
  *  @param uart_fd file-descriptor of UART device as provided by initialise_uart()
  *  @return 0 on success, -1 on error
  */
-int deinitialise_uart(int &uart_fd);
+int bind_deinitialise_uart(int &uart_fd);
 
 /**
  *  Sends a packet to UART
  *  @param uart_fd file-descriptor of UART device
  */
-int send_packet(int uart_fd);
+int bind_send_packet(int uart_fd);
 
 
 

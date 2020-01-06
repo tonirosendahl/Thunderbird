@@ -22,7 +22,7 @@ px4_add_board(
 		tap_esc
 		#telemetry # all available telemetry drivers
 		test_ppm
-		#typhoon_bind
+		typhoon_bind
 		st16_telemetry
 
 	MODULES

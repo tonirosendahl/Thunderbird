@@ -38,7 +38,7 @@
 #define B115200 115200
 #endif
 
-int initialise_uart(const char *const device, int &uart_fd)
+int bind_initialise_uart(const char *const device, int &uart_fd)
 {
 	// open uart
 	uart_fd = open(device, O_RDWR | O_NOCTTY | O_NONBLOCK);
@@ -73,7 +73,7 @@ int initialise_uart(const char *const device, int &uart_fd)
 	return 0;
 }
 
-int deinitialise_uart(int &uart_fd)
+int bind_deinitialise_uart(int &uart_fd)
 {
 	int ret = close(uart_fd);
 
@@ -84,7 +84,7 @@ int deinitialise_uart(int &uart_fd)
 	return ret;
 }
 
-int send_packet(int uart_fd)
+int bind_send_packet(int uart_fd)
 {
 	char txbuf[] = {0x55,0x55,0x8,0x4,0x0,0x0,0x42,0x49,0x4E,0x44,0xB0};
 	int packet_len = sizeof(txbuf);
@@ -152,16 +152,16 @@ void Typhoon_bind::run()
 {
 	const char *device = nullptr;
 	char _device[32];
-	port_number = 0;
+	bind_port_number = 0;
 	device = "/dev/ttyS3";
 
 	strncpy(_device, device, sizeof(_device));
 	_device[sizeof(_device) - 1] = '\0';
 
-	initialise_uart(_device, port_number);
+	bind_initialise_uart(_device, bind_port_number);
 
 	//33 is amount of bytes to be sent. The bind command consists of 11 bytes, sent three times with a delay
-	if (send_packet(port_number) == 33)
+	if (bind_send_packet(bind_port_number) == 33)
 	{
 		PX4_INFO("Bind command sent.");
 	}
@@ -172,7 +172,7 @@ void Typhoon_bind::run()
 
 	PX4_INFO("Please reboot the drone before flight.");
 
-	deinitialise_uart(port_number);
+	bind_deinitialise_uart(bind_port_number);
 }
 
 int Typhoon_bind::print_usage(const char *reason)
